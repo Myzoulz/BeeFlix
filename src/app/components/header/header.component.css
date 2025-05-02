@@ -1,0 +1,27 @@
+
+header {
+  background: linear-gradient(#111010 , #1e1e1e);
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  max-width: 10%;
+  min-width: 200px;
+  height: auto;
+  object-fit: contain;
+  background-color: transparent;
+}
+
+.pesquisa {
+  flex: 1;
+  max-width: 400px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  background-color: transparent;
+}
