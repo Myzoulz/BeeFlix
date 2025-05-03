@@ -4,7 +4,7 @@ import { TmdbService } from '@services/tmdb.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselComponent],
+  imports: [CarouselComponent,],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -21,4 +21,5 @@ export class HomeComponent implements OnInit {
         .map((movie: any) => `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`);
     });
   }
+
 }

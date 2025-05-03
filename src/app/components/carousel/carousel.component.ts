@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './carousel.component.css'
 })
 export class CarouselComponent {
-  @Input() images: string[] = []; // Recebe as URLs das imagens como entrada
+  @Input() images: any[] = []; // Recebe as URLs das imagens como entrada
 }
