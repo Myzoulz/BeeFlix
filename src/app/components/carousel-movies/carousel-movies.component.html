@@ -1,0 +1,8 @@
+<section class="movies container mt-5">
+  <h2 class="movies__title text-center mb-4" appHighlightUppercase>{{ title }}</h2>
+  <div class="movie-carousel d-flex overflow-auto">
+    <div class="movie-item me-3" *ngFor="let movie of movies">
+      <img [src]="movie" alt="Movie Poster" class="movie-poster img-fluid rounded">
+    </div>
+  </div>
+</section>

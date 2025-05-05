@@ -1,25 +1,49 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CarouselComponent } from "../../carousel/carousel.component";
 import { TmdbService } from '@services/tmdb.service';
+import { CarouselMoviesComponent } from '../../carousel-movies/carousel-movies.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselComponent,],
+  imports: [CarouselComponent, CarouselMoviesComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   images: string[] = [];
+  mostViewedMovies: string[] = [];
+  nowPlayingMovies: string[] = [];
+  topRatedMovies: string[] = [];
+  blockbusterMovies: string[] = [];
 
   constructor(private tmdbService: TmdbService) {}
 
   ngOnInit(): void {
     this.tmdbService.getTrendingMovies().subscribe((data) => {
-      // Usar o campo backdrop_path para imagens mais largas
       this.images = data.results
-        .slice(0, 5) // Seleciona apenas os 5 primeiros filmes
+        .slice(0, 5)
         .map((movie: any) => `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`);
     });
-  }
 
+    this.tmdbService.getMostViewedMovies().subscribe((data) => {
+      this.mostViewedMovies = data.results
+        .map((movie: any) => `https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+    });
+
+    this.tmdbService.getNowPlayingMovies().subscribe((data) => {
+      this.nowPlayingMovies = data.results
+        .map((movie: any) => `https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+    });
+
+    this.tmdbService.getTopRatedMovies().subscribe((data) => {
+      this.topRatedMovies = data.results
+        .map((movie: any) => `https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+    });
+
+    this.tmdbService.getblockbusterMovies().subscribe((data) => {
+      this.blockbusterMovies = data.results
+        .map((movie: any) => `https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+    });
+  }
 }

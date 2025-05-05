@@ -1,0 +1,37 @@
+.footer {
+  background: linear-gradient(#1e1e1e, #111010);
+  color: #fff;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+.footer-links a {
+  color: #e6ab15;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+  background-color: transparent;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-copyright {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #aaa;
+  background-color: transparent;
+}
