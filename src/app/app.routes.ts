@@ -4,5 +4,5 @@ import { InfoComponent } from './components/pages/info/info.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'info', component: InfoComponent},
+  {path: 'movie/:id', component: InfoComponent},
 ];

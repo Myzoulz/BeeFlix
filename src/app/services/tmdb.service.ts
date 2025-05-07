@@ -41,4 +41,10 @@ export class TmdbService {
       `${this.baseUrl}/discover/movie?api_key=${this.apiKey}&sort_by=revenue.desc`
     );
   }
+
+  getMovieDetails(movieId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}&append_to_response=credits`
+    );
+  }
 }

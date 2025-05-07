@@ -1,1 +1,33 @@
-<h2>Info</h2>
+<main class="info">
+  <header>
+    <h1 class="title">{{ movieDetails.title }}</h1>
+  </header>
+  <section class="container" *ngIf="movieDetails">
+    <figure>
+      <img class="image" [src]="'https://image.tmdb.org/t/p/w500' + movieDetails.poster_path" alt="{{ movieDetails.title }}">
+      <figcaption>{{ movieDetails.title }}</figcaption>
+    </figure>
+    <article class="details">
+      <p>{{ movieDetails.overview }}</p>
+      <p><strong>Data de Lançamento:</strong> {{ movieDetails.release_date }}</p>
+      <p><strong>Nota:</strong> {{ movieDetails.vote_average }}</p>
+
+      <p><strong>Gêneros:</strong> {{ genres.join(', ') }}</p>
+      <p><strong>Produtores:</strong> {{ producers.join(', ') }}</p>
+
+      <section *ngIf="cast.length > 0">
+        <h2>Elenco</h2>
+        <ul>
+          <li *ngFor="let actor of cast">
+            {{ actor.name }} como {{ actor.character }}
+          </li>
+        </ul>
+      </section>
+    </article>
+    <footer>
+      <a [routerLink]="['/']">
+        <button class="button">Assista Agora</button>
+      </a>
+    </footer>
+  </section>
+</main>
