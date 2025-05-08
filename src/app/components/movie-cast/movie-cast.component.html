@@ -1,0 +1,8 @@
+<section *ngIf="cast.length > 0">
+  <h2>Elenco</h2>
+  <ul>
+    <li *ngFor="let actor of cast">
+      {{ actor.name }} como {{ actor.character }}
+    </li>
+  </ul>
+</section>

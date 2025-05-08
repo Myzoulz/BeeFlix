@@ -3,7 +3,7 @@
   <div class="movie-carousel d-flex overflow-auto">
     <div class="movie-item me-3" *ngFor="let movie of movies">
       <a [routerLink]="['/movie', movie.id]" class="movie-link">
-        <img [src]="movie.poster" alt="Movie Poster" class="movie-poster img-fluid rounded">
+        <img [src]="movie.poster ? movie.poster : 'assets/placeholder.jpg'" alt="Movie Poster" class="movie-poster img-fluid rounded">
       </a>
     </div>
   </div>

@@ -1,6 +1,6 @@
-<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+<section id="carouselExample" class="carousel slide" aria-label="Movie Carousel" data-bs-ride="carousel" data-bs-interval="3000">
   <div class="carousel-indicators">
-    <button *ngFor="let image of images; let i = index" type="button"
+    <button *ngFor="let item of carouselItems; let i = index" type="button"
             [attr.data-bs-target]="'#carouselExample'"
             [attr.data-bs-slide-to]="i"
             [class.active]="i === 0"
@@ -9,16 +9,16 @@
     </button>
   </div>
   <div class="carousel-inner">
-    <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === 0">
-      <img [src]="image" class="d-block w-100" [alt]="'Slide ' + (i + 1)">
-    </div>
+    <figure *ngFor="let item of carouselItems; let i = index" class="carousel-item" [class.active]="i === 0">
+      <a [routerLink]="['/movie', item.id]">
+        <img [src]="item.backdrop" class="d-block w-100" [alt]="'Slide ' + (i + 1)">
+      </a>
+    </figure>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" aria-label="Previous Slide">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" aria-label="Next Slide">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
   </button>
-</div>
+</section>

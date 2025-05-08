@@ -1,22 +1,55 @@
 export interface Movie {
-  adult: boolean;
-  backdrop_path: string | null;
-  genre_ids: number[];
   id: number;
-  original_language: OriginalLanguage;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string | null;
-  release_date: Date;
   title: string;
-  video: boolean;
+  poster_path: string | null;
+  overview: string;
+  release_date: string;
   vote_average: number;
-  vote_count: number;
+  backdrop_path: string;
 }
 
-export enum OriginalLanguage {
-  En = "en",
-  Es = "es",
-  Pt = "pt",
+export interface MainCarouselItem {
+  id: number;
+  backdrop: string;
+}
+
+export interface CarouselMovie {
+  id: number;
+  poster: string;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface CrewMember {
+  name: string;
+  job: string;
+}
+
+export interface CastMember {
+  name: string;
+  character: string;
+}
+
+export interface MovieDetails {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  overview: string;
+  release_date: string;
+  vote_average: number;
+  genres: Genre[];
+  credits: {
+    crew: CrewMember[];
+    cast: CastMember[];
+  };
+}
+
+export interface SearchResult {
+  results: Movie[];
+  page: number;
+  total_results: number;
+  total_pages: number;
 }

@@ -1,11 +1,7 @@
 <section class="movies">
-  <app-carousel [images]="images"></app-carousel>
+  <app-carousel [carouselItems]="mainCarousel"></app-carousel>
 
-  <app-carousel-movies [movies]="mostViewedMovies" title="Filmes em Alta">
-  </app-carousel-movies>
-  <app-carousel-movies [movies]="blockbusterMovies" title="Sucessos de Bilheteria"></app-carousel-movies>
-  <app-carousel-movies [movies]="nowPlayingMovies" title="Nos Cinemas"></app-carousel-movies>
-  <app-carousel-movies [movies]="topRatedMovies" title="Melhores Avaliados"></app-carousel-movies>
-
-  <div class="spacer"></div>
+  <div *ngFor="let category of movieCategories">
+    <app-carousel-movies [movies]="category.movies" [title]="category.title"></app-carousel-movies>
+  </div>
 </section>

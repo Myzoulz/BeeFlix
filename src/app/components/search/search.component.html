@@ -1,0 +1,7 @@
+<div class="search-results" *ngIf="results.length > 0">
+  <ul>
+    <li *ngFor="let result of results" (click)="selectResult(result)">
+      {{ result.title }}
+    </li>
+  </ul>
+</div>

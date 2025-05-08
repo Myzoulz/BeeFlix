@@ -1,9 +1,24 @@
 .carousel-inner img {
   width: 100%;
-  aspect-ratio: 13 / 4;
+  height: auto;
+  max-height: 620px;
   object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-indicators {
   background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .carousel-inner img {
+    aspect-ratio: 4 / 2;
+  }
+
+@media (max-width: 480px) {
+  .carousel-inner img {
+    aspect-ratio: 1 / 1;
+  }
+
+}
 }

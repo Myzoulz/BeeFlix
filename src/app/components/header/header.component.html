@@ -3,6 +3,11 @@
     <img src="/assets/BeeFlix-Logo.png" alt="Logo" class="logo" />
   </a>
   <div>
-    <input type="text" placeholder="Pesquisar..." class="pesquisa" />
+    <input class="pesquisa"type="text"placeholder="Pesquisar..."class="pesquisa"(input)="onSearch($event)"
+    />
+    <app-search
+      [results]="searchResults"
+      (resultSelected)="onResultSelected($event)"
+    ></app-search>
   </div>
 </header>

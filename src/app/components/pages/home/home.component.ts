@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselComponent } from "../../carousel/carousel.component";
 import { TmdbService } from '@services/tmdb.service';
 import { CarouselMoviesComponent } from '../../carousel-movies/carousel-movies.component';
-import { Movie } from 'app/components/interfaces/movies';
+import { CarouselMovie, MainCarouselItem, Movie } from 'app/components/interfaces/movies';
 
 @Component({
   selector: 'app-home',
@@ -12,59 +12,52 @@ import { Movie } from 'app/components/interfaces/movies';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  images: string[] = [];
-  mostViewedMovies: { id: number; poster: string }[] = [];
-  nowPlayingMovies: { id: number; poster: string }[] = [];
-  topRatedMovies: { id: number; poster: string }[] = [];
-  blockbusterMovies: { id: number; poster: string }[] = [];
+  mainCarousel: MainCarouselItem[] = [];
+  movieCategories: { title: string; movies: CarouselMovie[] }[] = [];
 
   constructor(private tmdbService: TmdbService) {}
 
   ngOnInit(): void {
-    this.tmdbService.getTrendingMovies().subscribe((data) => {
-      this.images = data.results
-        .slice(0, 5)
-        .map((movie: any) => `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`);
+    this.tmdbService.getTrendingMovies().subscribe((data: { results: Movie[] }) => {
+      this.mainCarousel = data.results.slice(0, 5).map((movie) => ({
+        id: movie.id,
+        backdrop: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`,
+      }));
     });
 
-    this.tmdbService.getMostViewedMovies().subscribe((data) => {
-      this.mostViewedMovies = data.results
-        .map((movie: Movie) => ({
-          id: movie.id,
-          poster: movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : 'assets/images/placeholder.jpg',
-        }));
+    this.tmdbService.getMostViewedMovies().subscribe((data: { results: Movie[] }) => {
+      this.movieCategories.push({
+        title: 'Filmes em Alta',
+        movies: this.mapMoviesToCarousel(data),
+      });
     });
 
-    this.tmdbService.getNowPlayingMovies().subscribe((data) => {
-      this.nowPlayingMovies = data.results
-        .map((movie: Movie) => ({
-          id: movie.id,
-          poster: movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : 'assets/images/placeholder.jpg',
-        }));
+    this.tmdbService.getBlockbusterMovies().subscribe((data: { results: Movie[] }) => {
+      this.movieCategories.push({
+        title: 'Sucessos de Bilheteria',
+        movies: this.mapMoviesToCarousel(data),
+      });
     });
 
-    this.tmdbService.getTopRatedMovies().subscribe((data) => {
-      this.topRatedMovies = data.results
-        .map((movie: Movie) => ({
-          id: movie.id,
-          poster: movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : 'assets/images/placeholder.jpg',
-        }));
+    this.tmdbService.getNowPlayingMovies().subscribe((data: { results: Movie[] }) => {
+      this.movieCategories.push({
+        title: 'Nos Cinemas',
+        movies: this.mapMoviesToCarousel(data),
+      });
     });
 
-    this.tmdbService.getblockbusterMovies().subscribe((data) => {
-      this.blockbusterMovies = data.results
-        .map((movie: Movie) => ({
-          id: movie.id,
-          poster: movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : 'assets/images/placeholder.jpg',
-        }));
+    this.tmdbService.getTopRatedMovies().subscribe((data: { results: Movie[] }) => {
+      this.movieCategories.push({
+        title: 'Melhores Avaliados',
+        movies: this.mapMoviesToCarousel(data),
+      });
     });
+  }
+
+  private mapMoviesToCarousel(data: { results: Movie[] }): CarouselMovie[] {
+    return data.results.map((movie) => ({
+      id: movie.id,
+      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+    }));
   }
 }
